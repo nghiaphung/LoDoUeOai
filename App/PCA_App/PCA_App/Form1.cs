@@ -113,7 +113,7 @@ namespace PCA_App
             cbxCameras.DisplayMember = "Value";
             cbxCameras.ValueMember = "Key";
 
-            
+            _frame = new Mat();
 
         }
 
@@ -128,7 +128,7 @@ namespace PCA_App
 
             clsMatrixOperation.iDefaultImageCount = PCA_App.Properties.Settings.Default.DefaultNumberOfImages;
             clsMatrixOperation.iDimensionalReduction = PCA_App.Properties.Settings.Default.DReductionVal;
-            GetImageMatrix();
+            //GetImageMatrix();
 
         }
 
@@ -306,3 +306,4 @@ namespace PCA_App
 
 
 }
+

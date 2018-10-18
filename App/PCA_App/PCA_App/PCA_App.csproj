@@ -13,7 +13,7 @@
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <PlatformTarget>x64</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -35,12 +35,6 @@
     <Reference Include="DirectShowLib-2005">
       <HintPath>C:\DirectShow\lib\DirectShowLib-2005.dll</HintPath>
     </Reference>
-    <Reference Include="Emgu.CV">
-      <HintPath>C:\Emgu\emgucv-windows-universal 3.0.0.2157\bin\Emgu.CV.dll</HintPath>
-    </Reference>
-    <Reference Include="Emgu.CV.OCR">
-      <HintPath>C:\Emgu\emgucv-windows-universal 3.0.0.2157\bin\Emgu.CV.OCR.dll</HintPath>
-    </Reference>
     <Reference Include="Emgu.CV.UI">
       <HintPath>C:\Emgu\emgucv-windesktop 3.4.1.2976\bin\Emgu.CV.UI.dll</HintPath>
     </Reference>
@@ -50,9 +44,6 @@
     <Reference Include="Emgu.CV.World">
       <HintPath>C:\Emgu\emgucv-windesktop 3.4.1.2976\bin\Emgu.CV.World.dll</HintPath>
     </Reference>
-    <Reference Include="Emgu.Util">
-      <HintPath>C:\Emgu\emgucv-windows-universal 3.0.0.2157\bin\Emgu.Util.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <EmbedInteropTypes>True</EmbedInteropTypes>
@@ -60,6 +51,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -109,7 +101,18 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="x64\concrt140.dll" />
+    <Content Include="x64\cvextern.dll" />
+    <Content Include="x64\msvcp140.dll" />
+    <Content Include="x64\opencv_ffmpeg320_64.dll" />
+    <Content Include="x64\vcruntime140.dll" />
+    <Content Include="x86\concrt140.dll" />
+    <Content Include="x86\cvextern.dll" />
+    <Content Include="x86\msvcp140.dll" />
+    <Content Include="x86\opencv_ffmpeg320.dll" />
+    <Content Include="x86\vcruntime140.dll" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

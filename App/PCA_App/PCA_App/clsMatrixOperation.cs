@@ -114,10 +114,10 @@ namespace PCA_App.Class
         {
             for (int iRow = 0; iRow < OriginalEigenVector.Rows; iRow++)
             {
-                for (int iColumn = 0; iColumn < CameraTester.Properties.Settings.Default.DReductionVal; iColumn++)
+                for (int iColumn = 0; iColumn < PCA_App.Properties.Settings.Default.DReductionVal; iColumn++)
                 {
                     if (iColumn == 0)
-                        EigenVectorForImage[iRow] = new double[CameraTester.Properties.Settings.Default.DReductionVal];
+                        EigenVectorForImage[iRow] = new double[PCA_App.Properties.Settings.Default.DReductionVal];
                     EigenVectorForImage[iRow][iColumn] = new double();
                     EigenVectorForImage[iRow][iColumn] = OriginalEigenVector[iRow, iColumn];
                 }
@@ -193,7 +193,7 @@ namespace PCA_App.Class
             for (int iRow = 0; iRow < TransposeMatrix.Length; iRow++)
             {
 
-                for (int iColumn = 0; iColumn < CameraTester.Properties.Settings.Default.DReductionVal; iColumn++)
+                for (int iColumn = 0; iColumn < PCA_App.Properties.Settings.Default.DReductionVal; iColumn++)
                 {
 
                     double s = 0;
@@ -202,7 +202,7 @@ namespace PCA_App.Class
                         s += TransposeMatrix[iRow][k] * EigenVectorMatrix[k][iColumn];
                     }
                     if (iColumn == 0)
-                        ProductMaterix[iRow] = new double[CameraTester.Properties.Settings.Default.DReductionVal];
+                        ProductMaterix[iRow] = new double[PCA_App.Properties.Settings.Default.DReductionVal];
                     ProductMaterix[iRow][iColumn] = new double();
                     ProductMaterix[iRow][iColumn] = s;
                 }
@@ -221,12 +221,12 @@ namespace PCA_App.Class
                 {
 
                     double s = 0;
-                    for (int k = 0; k < CameraTester.Properties.Settings.Default.DReductionVal; k++)
+                    for (int k = 0; k < PCA_App.Properties.Settings.Default.DReductionVal; k++)
                     {
                         s += OriginalMAtrix[iRow][k] * EigenFaceMatrix[k][iColumn];
                     }
                     if (iColumn == 0)
-                        ProductMaterix[iRow] = new double[CameraTester.Properties.Settings.Default.DReductionVal];
+                        ProductMaterix[iRow] = new double[PCA_App.Properties.Settings.Default.DReductionVal];
                     ProductMaterix[iRow][iColumn] = new double();
                     ProductMaterix[iRow][iColumn] = s;
                 }
@@ -294,7 +294,7 @@ namespace PCA_App.Class
 
 
                     if (iColumn == 0)
-                        OutputMAtrix[iRow] = new double[CameraTester.Properties.Settings.Default.DReductionVal];
+                        OutputMAtrix[iRow] = new double[PCA_App.Properties.Settings.Default.DReductionVal];
                     OutputMAtrix[iRow][iColumn] = new double();
                     OutputMAtrix[iRow][iColumn] = OriginalMAtrix[iRow][IndexMatrix[iColumn]];
                 }
