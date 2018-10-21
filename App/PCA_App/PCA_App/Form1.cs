@@ -81,6 +81,14 @@ namespace PCA_App
         double[][] EigenVectorforImage = null;
         double[][] MeanVector = null;
         double[][] MainImageMatrix_forAllImages = null;
+        string workbookPath = "E:\\ImageInspection\\Data.xlsx";
+
+        byte[] startInspection = {0x01};
+        byte[] stopInspection  = {0x02};
+
+        string dateTime = "";
+        string folderName = "";
+
 
         public Form1()
         {
@@ -113,7 +121,9 @@ namespace PCA_App
             cbxCameras.DisplayMember = "Value";
             cbxCameras.ValueMember = "Key";
 
-            _frame = new Mat();
+            
+
+            
 
         }
 
@@ -216,7 +226,8 @@ namespace PCA_App
         {
             if (_Capture != null && _Capture.Ptr != IntPtr.Zero)
             {
-                _Capture.Retrieve(_frame, 0);
+                Mat _frame = new Mat();
+                _Capture.Retrieve(_frame);
                 //Show video capture
                 ibxCamReview.Image = _frame;
             }
@@ -230,10 +241,13 @@ namespace PCA_App
             CopyImageMatrix_forallImages = new double[1][];
             //InitializeMatrix_1(ref MainImageMatrix);
             // Call function to fetch all image in a matrix format
+            //Get data image from "Data" folder to an array (first dimension is pixel value, second dimension is image index)
             _objMatrix.InitializeMatrix(ref MainImageMatrix_forAllImages);
+            // just copy from "MainImageMatrix_forAllImages" to "CopyImageMatrix_forallImages"
             _objMatrix.CopyMatrix(MainImageMatrix_forAllImages, ref CopyImageMatrix_forallImages);
             //Code for finding means vector from the MainImage Matrix
             MeanVector = new double[1][];
+            // calculate the mean value of pixel value for each image
             MeanVector = _objMatrix.GetMeanVector(ref MainImageMatrix_forAllImages);
 
             //Performing Step 2 of Algorithm
@@ -270,7 +284,7 @@ namespace PCA_App
             _objMatrix.ConvertinPixelScale(TransposevalImage, ref PixelmatrixforImage, EigenFaceImage.Length);
             //  _objMatrix.Transpose(PixelmatrixforImage, ref TransposevalImage,EigenFaceImage.Length);
 
-            int iControl = 0;
+            //int iControl = 0;
             /* foreach (Control cobj in gbxImages.Controls)
              {
                  if (cobj is PictureBox)
@@ -298,8 +312,96 @@ namespace PCA_App
                 }
             }
             //  _objMatrix.Multiply(CopyImageMatrix, EigenFaceImage, ref BaseMatrix);
-    }
+        }
 
+
+        private void ExportData()
+        {
+
+            //Start Excel and get Application object.
+            oXL = new Microsoft.Office.Interop.Excel.Application();
+            //Get a new workbook.
+            //oWB = (Microsoft.Office.Interop.Excel._Workbook)(oXL.Workbooks.Add(""));
+            oWB = oXL.Workbooks.Open(workbookPath, 0, false, 5, "", "", false, Microsoft.Office.Interop.Excel.XlPlatform.xlWindows, "", true, false, 0, true, false, false);
+            oXL.Visible = true;
+
+
+            //oSheet = (Microsoft.Office.Interop.Excel._Worksheet)oWB.ActiveSheet;
+            //oSheet.Activate();
+            oSheet = (Microsoft.Office.Interop.Excel.Worksheet)oWB.Worksheets.Add();
+            oSheet = (Microsoft.Office.Interop.Excel._Worksheet)oWB.ActiveSheet;
+            oSheet.Activate();
+            oSheet.Name = DateTime.Now.ToString("yyyyMMdd-HHmm");
+
+            //Add table headers going cell by cell.
+            oSheet.Cells[1, 1] = "First Name";
+            oSheet.Cells[1, 2] = "Last Name";
+            oSheet.Cells[1, 3] = "Full Name";
+            oSheet.Cells[1, 4] = "Salary";
+
+            //Format A1:D1 as bold, vertical alignment = center.
+            oSheet.get_Range("A1", "D1").Font.Bold = true;
+            oSheet.get_Range("A1", "D1").VerticalAlignment =
+                Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
+
+            // Create an array to multiple values at once.
+            string[,] saNames = new string[5, 2];
+
+            saNames[0, 0] = "John";
+            saNames[0, 1] = "Smith";
+            saNames[1, 0] = "Tom";
+
+            saNames[4, 1] = "Johnson";
+
+            //Fill A2:B6 with an array of values (First and Last Names).
+            oSheet.get_Range("A2", "B6").Value2 = saNames;
+
+            //Fill C2:C6 with a relative formula (=A2 & " " & B2).
+            oRng = oSheet.get_Range("C2", "C6");
+            oRng.Formula = "=A2 & \" \" & B2";
+
+            //Fill D2:D6 with a formula(=RAND()*100000) and apply format.
+            oRng = oSheet.get_Range("D2", "D6");
+            //AutoFit columns A:D.
+            oRng.Formula = "=RAND()*100000";
+            oRng.NumberFormat = "$0.00";
+
+            oRng = oSheet.get_Range("A1", "D1");
+            oRng.EntireColumn.AutoFit();
+
+            oXL.Visible = false;
+            oXL.UserControl = false;
+            //Save file
+            //oWB.Save();
+            //Save as
+            oWB.SaveAs("C:\\file.xls", XlFileFormat.xlWorkbookNormal, null, null, false, false, XlSaveAsAccessMode.xlExclusive, false, false, false, false, false);
+            oWB.Close();
+
+        }
+
+        private void btnInspection_Click(object sender, EventArgs e)
+        {
+            // send command to MCU
+            _Com.Write(startInspection, 0, 1);
+            //Make new Path folder
+            dateTime = DateTime.Now.ToString("yyyyMMdd-HHmm");
+            folderName = "D:\\ImageInspection\\" + dateTime;
+
+            bool exist = System.IO.Directory.Exists(folderName);
+            if (!exist) System.IO.Directory.CreateDirectory(folderName);
+
+            //OpenExcelFile();
+
+            _Com.Close();
+            //_Com.DataReceived += Proxy;
+            _Com.Open();
+
+        }
+
+        private void btnExcel_Click(object sender, EventArgs e)
+        {
+
+        }
 
 
     }

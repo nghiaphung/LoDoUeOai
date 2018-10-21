@@ -38,11 +38,19 @@
             this.cbxCameras = new System.Windows.Forms.ComboBox();
             this.ibxCamReview = new Emgu.CV.UI.ImageBox();
             this.ibxCamCapture = new Emgu.CV.UI.ImageBox();
-            this.ibxCamResult = new Emgu.CV.UI.ImageBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.textBoxOK = new System.Windows.Forms.TextBox();
+            this.textBoxResult = new System.Windows.Forms.TextBox();
+            this.btnInspection = new System.Windows.Forms.Button();
+            this.btnExcel = new System.Windows.Forms.Button();
+            this.button5 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ibxCamReview)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ibxCamCapture)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ibxCamResult)).BeginInit();
+            this.groupBox2.SuspendLayout();
+            this.groupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
             // cbxPort
@@ -115,37 +123,106 @@
             // 
             // ibxCamReview
             // 
-            this.ibxCamReview.Location = new System.Drawing.Point(169, 133);
+            this.ibxCamReview.Location = new System.Drawing.Point(32, 15);
             this.ibxCamReview.Name = "ibxCamReview";
-            this.ibxCamReview.Size = new System.Drawing.Size(249, 239);
+            this.ibxCamReview.Size = new System.Drawing.Size(332, 262);
             this.ibxCamReview.TabIndex = 2;
             this.ibxCamReview.TabStop = false;
             // 
             // ibxCamCapture
             // 
-            this.ibxCamCapture.Location = new System.Drawing.Point(445, 133);
+            this.ibxCamCapture.Location = new System.Drawing.Point(556, 141);
             this.ibxCamCapture.Name = "ibxCamCapture";
-            this.ibxCamCapture.Size = new System.Drawing.Size(281, 238);
+            this.ibxCamCapture.Size = new System.Drawing.Size(313, 262);
             this.ibxCamCapture.TabIndex = 2;
             this.ibxCamCapture.TabStop = false;
             // 
-            // ibxCamResult
+            // groupBox2
             // 
-            this.ibxCamResult.Location = new System.Drawing.Point(744, 133);
-            this.ibxCamResult.Name = "ibxCamResult";
-            this.ibxCamResult.Size = new System.Drawing.Size(255, 237);
-            this.ibxCamResult.TabIndex = 2;
-            this.ibxCamResult.TabStop = false;
+            this.groupBox2.Controls.Add(this.ibxCamReview);
+            this.groupBox2.Location = new System.Drawing.Point(138, 126);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(394, 289);
+            this.groupBox2.TabIndex = 5;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Camera Review";
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Location = new System.Drawing.Point(538, 125);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(354, 289);
+            this.groupBox3.TabIndex = 6;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Capture";
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.textBoxOK);
+            this.groupBox4.Controls.Add(this.textBoxResult);
+            this.groupBox4.Location = new System.Drawing.Point(313, 22);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(188, 78);
+            this.groupBox4.TabIndex = 7;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Result";
+            // 
+            // textBoxOK
+            // 
+            this.textBoxOK.Location = new System.Drawing.Point(24, 45);
+            this.textBoxOK.Name = "textBoxOK";
+            this.textBoxOK.Size = new System.Drawing.Size(136, 20);
+            this.textBoxOK.TabIndex = 1;
+            // 
+            // textBoxResult
+            // 
+            this.textBoxResult.Location = new System.Drawing.Point(24, 19);
+            this.textBoxResult.Name = "textBoxResult";
+            this.textBoxResult.Size = new System.Drawing.Size(136, 20);
+            this.textBoxResult.TabIndex = 0;
+            // 
+            // btnInspection
+            // 
+            this.btnInspection.Location = new System.Drawing.Point(12, 141);
+            this.btnInspection.Name = "btnInspection";
+            this.btnInspection.Size = new System.Drawing.Size(109, 35);
+            this.btnInspection.TabIndex = 8;
+            this.btnInspection.Text = "START INSPECTION";
+            this.btnInspection.UseVisualStyleBackColor = true;
+            this.btnInspection.Click += new System.EventHandler(this.btnInspection_Click);
+            // 
+            // btnExcel
+            // 
+            this.btnExcel.Location = new System.Drawing.Point(12, 194);
+            this.btnExcel.Name = "btnExcel";
+            this.btnExcel.Size = new System.Drawing.Size(109, 23);
+            this.btnExcel.TabIndex = 10;
+            this.btnExcel.Text = "EXPORT";
+            this.btnExcel.UseVisualStyleBackColor = true;
+            this.btnExcel.Click += new System.EventHandler(this.btnExcel_Click);
+            // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(12, 380);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(109, 23);
+            this.button5.TabIndex = 9;
+            this.button5.Text = "EXIT";
+            this.button5.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1035, 392);
-            this.Controls.Add(this.ibxCamResult);
+            this.ClientSize = new System.Drawing.Size(904, 619);
+            this.Controls.Add(this.button5);
+            this.Controls.Add(this.btnExcel);
+            this.Controls.Add(this.btnInspection);
+            this.Controls.Add(this.groupBox4);
+            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.ibxCamCapture);
-            this.Controls.Add(this.ibxCamReview);
             this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.groupBox3);
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -153,7 +230,9 @@
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ibxCamReview)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ibxCamCapture)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ibxCamResult)).EndInit();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -169,7 +248,14 @@
         private System.Windows.Forms.ComboBox cbxCameras;
         private Emgu.CV.UI.ImageBox ibxCamReview;
         private Emgu.CV.UI.ImageBox ibxCamCapture;
-        private Emgu.CV.UI.ImageBox ibxCamResult;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.TextBox textBoxOK;
+        private System.Windows.Forms.TextBox textBoxResult;
+        private System.Windows.Forms.Button btnInspection;
+        private System.Windows.Forms.Button btnExcel;
+        private System.Windows.Forms.Button button5;
 
     }
 }
