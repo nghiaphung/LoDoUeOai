@@ -13,7 +13,14 @@ typedef enum
 	STATE_CMD,
 }state_t;
 
+typedef enum
+{
+	CMD_START = 0x01,
+	CMD_STOP  = 0x02,
+}cmd_t;
+
 volatile state_t gState = STATE_IDLE;
+volatile cmd_t gCmd = CMD_STOP;
 void call (void);
 void prvHardwareSetup(void);
 void CMD_Service(uint8_t byte);
@@ -56,7 +63,8 @@ void prvHardwareSetup(void)
 
 void CMD_Service(uint8_t byte)
 {
-	
+	gState = STATE_CMD;
+	gCmd = CMD_STOP;
 }
 
 void call (void)
@@ -65,11 +73,13 @@ void call (void)
 	if (i == 0)
 	{
 		GPIO_SetBits(GPIOA, GPIO_Pin_12);
+		GPIO_SetBits(GPIOB, GPIO_Pin_12);
 		i = 1;
 	}
 	else if (i == 1)
 	{
 		GPIO_ResetBits(GPIOA, GPIO_Pin_12);
+		GPIO_ResetBits(GPIOB, GPIO_Pin_12);
 		i = 0;
 	}
 	int id;
